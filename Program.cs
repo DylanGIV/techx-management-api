@@ -61,4 +61,4 @@ using (var scope = app.Services.CreateScope())
     app.MapControllers();
 }
 
-app.Run("https://techx-management-api.herokuapp.com/");
+app.Run("http://localhost:4000");
