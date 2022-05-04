@@ -6,7 +6,7 @@ using TechxManagementApi.Entities;
 public class CreateRequest
 {
     [Required]
-    public string Title { get; set; }
+    public string Company { get; set; }
 
     [Required]
     public string FirstName { get; set; }

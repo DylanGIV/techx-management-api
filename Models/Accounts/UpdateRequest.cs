@@ -10,7 +10,7 @@ public class UpdateRequest
     private string _role;
     private string _email;
     
-    public string Title { get; set; }
+    public string Company { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
 
