@@ -61,4 +61,4 @@ using (var scope = app.Services.CreateScope())
     app.MapControllers();
 }
 
-app.Run("http://localhost");
+app.Run("http://localhost:80");
