@@ -61,4 +61,4 @@ using (var scope = app.Services.CreateScope())
     app.MapControllers();
 }
 
-app.Run("https://git.heroku.com/techx-management-api.git");
+app.Run("https://techx-management-api.herokuapp.com/");
