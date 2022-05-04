@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 using TechxManagementApi.Authorization;
 using TechxManagementApi.Helpers;
@@ -60,5 +61,11 @@ using (var scope = app.Services.CreateScope())
 
     app.MapControllers();
 }
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.XForwardedProto
+});
 
-app.Run("http://localhost:5000");
+
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+app.Run("http://0.0.0.0:" + port);
