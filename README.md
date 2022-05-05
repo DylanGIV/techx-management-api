@@ -9,6 +9,6 @@ Run the program using the green play button on "TechxManagementApi"
 
 Visit and test the api using swagger at http://localhost:5000/swagger/index.html
 
-Hosted on Heroku
+Hosted on Heroku.
 
 Documentation at https://jasonwatmore.com/post/2022/02/26/net-6-boilerplate-api-tutorial-with-email-sign-up-verification-authentication-forgot-password
