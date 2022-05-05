@@ -1,5 +1,5 @@
 
-.NET 6.0 - API with Email Sign Up, Verification, Authentication & Forgot Password
+.NET 6.0 - API with Email Sign Up, Verification, Authentication & Forgot Password 
 
 Clone and use Visual Studio 2022
 
