@@ -2,6 +2,7 @@
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
+        <UserSecretsId>83085606-c827-43a1-af86-68c6b8f94804</UserSecretsId>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="AutoMapper" Version="11.0.1" />

@@ -4,6 +4,7 @@ using System.Text.Json.Serialization;
 using TechxManagementApi.Authorization;
 using TechxManagementApi.Helpers;
 using TechxManagementApi.Services;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,7 +24,21 @@ var builder = WebApplication.CreateBuilder(args);
     services.AddSwaggerGen();
 
     // configure strongly typed settings object
-    services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
+
+    IConfiguration config;
+
+#if (DEBUG)
+
+    config = builder.Configuration;
+
+#else
+
+    config = new ConfigurationBuilder().AddEnvironmentVariables().Build();
+
+#endif
+
+    services.Configure<AppSettings>(config.GetSection("AppSettings"));
+
 
     // configure DI for application services
     services.AddScoped<IJwtUtils, JwtUtils>();
