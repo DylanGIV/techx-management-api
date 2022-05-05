@@ -29,7 +29,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 #if (DEBUG)
 
-    config = builder.Configuration;
+    config = builder.Configuration.GetSection("AppSettings");
 
 #else
 
@@ -37,7 +37,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 #endif
 
-    services.Configure<AppSettings>(config.GetSection("AppSettings"));
+    services.Configure<AppSettings>(config);
 
 
     // configure DI for application services
