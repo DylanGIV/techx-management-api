@@ -18,5 +18,6 @@ public class DataContext : DbContext
     {
         // connect to postgresql database
         options.UseNpgsql(Environment.GetEnvironmentVariable("TECHX_DB_CONNECTION_STRING"));
+
     }
 }
