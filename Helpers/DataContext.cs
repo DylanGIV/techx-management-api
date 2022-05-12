@@ -1,5 +1,5 @@
 namespace TechxManagementApi.Helpers;
-
+using System;
 using Microsoft.EntityFrameworkCore;
 using TechxManagementApi.Entities;
 
@@ -16,7 +16,7 @@ public class DataContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
-        // connect to sqlite database
-        options.UseSqlite(Configuration.GetConnectionString("TechxManagementApiDatabase"));
+        // connect to postgresql database
+        options.UseNpgsql(Environment.GetEnvironmentVariable("TECHX_DB_CONNECTION_STRING"));
     }
 }
