@@ -1,0 +1,59 @@
+﻿<Properties GitUserInfo="UsingGIT" StartupConfiguration="{63ED38C4-F7E4-4A4C-9DE2-14895F75AE72}|Default">
+  <MonoDevelop.Ide.DebuggingService.Breakpoints />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <DisabledProjects>
+    <String>TechxManagementApi.Tests/TechxManagementApi.Tests.csproj</String>
+  </DisabledProjects>
+  <MonoDevelop.Ide.ItemProperties.TechxManagementApi PreferredExecutionTarget="/Applications/Brave Browser.app" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Services/CompanyService.cs">
+    <Files>
+      <File FileName="README.md" Line="15" Column="1" />
+      <File FileName="Controllers/AccountsController.cs" Line="61" Column="68" />
+      <File FileName="Helpers/AutoMapperProfile.cs" Line="1" Column="1" />
+      <File FileName="Helpers/DataContext.cs" Line="23" Column="2" />
+      <File FileName="Entities/Account.cs" Line="23" Column="42" />
+      <File FileName="Entities/RefreshToken.cs" Line="1" Column="1" />
+      <File FileName="Entities/Role.cs" Line="1" Column="1" />
+      <File FileName="Entities/Project.cs" Line="10" Column="48" />
+      <File FileName="Entities/Task.cs" Line="10" Column="48" />
+      <File FileName="Entities/Team.cs" Line="6" Column="37" />
+      <File FileName="Entities/Company.cs" Line="10" Column="3" />
+      <File FileName="Entities/Message.cs" Line="8" Column="48" />
+      <File FileName="Entities/MessageAttachment.cs" Line="6" Column="3" />
+      <File FileName="Entities/TaskAttachment.cs" Line="4" Column="25" />
+      <File FileName="Helpers/AppSettings.cs" Line="1" Column="1" />
+      <File FileName="Helpers/AppException.cs" Line="1" Column="1" />
+      <File FileName="Models/Accounts/AccountResponse.cs" Line="1" Column="1" />
+      <File FileName="Models/Accounts/AuthenticateRequest.cs" Line="1" Column="1" />
+      <File FileName="Models/Accounts/ForgotPasswordRequest.cs" Line="1" Column="1" />
+      <File FileName="Services/AccountService.cs" Line="3" Column="13" />
+      <File FileName="Services/EmailService.cs" Line="24" Column="20" />
+      <File FileName="Controllers/BaseController.cs" Line="1" Column="1" />
+      <File FileName="Controllers/CompanyController.cs" Line="23" Column="1" />
+      <File FileName="Models/Companies/CreateCompanyRequest.cs" Line="10" Column="3" />
+      <File FileName="Services/CompanyService.cs" Line="33" Column="24" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="TechxManagementApi" expanded="True">
+            <Node name="TechxManagementApi" expanded="True">
+              <Node name="Controllers" expanded="True" />
+              <Node name="Entities" expanded="True" />
+              <Node name="Models" expanded="True">
+                <Node name="Accounts" expanded="True" />
+                <Node name="Companies" expanded="True" />
+              </Node>
+              <Node name="Services" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>
