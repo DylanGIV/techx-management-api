@@ -16,13 +16,13 @@ namespace TechxManagementApi.Services
         public List<Project> GetAllCompanyProjects(long CompanyId);
     }
 
-	public class ProjectService
+	public class ProjectService : IProjectService
 	{
         private readonly DataContext _context;
         private readonly IJwtUtils _jwtUtils;
         private readonly IMapper _mapper;
         private readonly AppSettings _appSettings;
-        private readonly IEmailService _emailService;
+        // private readonly IEmailService _emailService;
 
         public ProjectService(
             DataContext context,

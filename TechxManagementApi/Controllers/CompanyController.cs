@@ -12,6 +12,8 @@ using TechxManagementApi.Services;
 
 namespace TechxManagementApi.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class CompanyController : BaseController
     {
         private readonly ICompanyService _companyService;
@@ -23,6 +25,7 @@ namespace TechxManagementApi.Controllers
 
         [Authorize(Role.Admin)]
         [HttpPost]
+        [Route("create")]
         public IActionResult CreateCompany([FromBody] CreateCompanyRequest createCompanyRequest, [FromHeader] string authorization)
         {
             _companyService.CreateCompany(createCompanyRequest, authorization);
@@ -31,6 +34,7 @@ namespace TechxManagementApi.Controllers
 
         [Authorize(Role.Admin)]
         [HttpPost]
+        [Route("invite")]
         public IActionResult InviteToCompany([FromBody] InviteToCompanyRequest inviteToCompanyRequest)
         {
             _companyService.InviteToCompany(inviteToCompanyRequest);

@@ -10,6 +10,8 @@ using TechxManagementApi.Services;
 
 namespace TechxManagementApi.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class ProjectController : Controller
     {
         private readonly IProjectService _projectService;
@@ -21,6 +23,7 @@ namespace TechxManagementApi.Controllers
 
         [Authorize(Role.Admin)]
         [HttpPost]
+        [Route("create")]
         public IActionResult CreateProject([FromBody] CreateProjectRequest createProjectRequest)
         {
             _projectService.CreateProject(createProjectRequest);
@@ -29,21 +32,24 @@ namespace TechxManagementApi.Controllers
 
         [Authorize(Role.Admin)]
         [HttpPost]
+        [Route("update/team")]
         public IActionResult UpdateProjectTeam([FromBody] UpdateProjectTeamRequest updateProjectTeamRequest)
         {
             _projectService.UpdateProjectTeam(updateProjectTeamRequest);
             return Ok(new { message = "Project Team updated." });
         }
-
+        [Authorize(Role.Admin)]
+        [HttpDelete]
+        [Route("delete")]
         public IActionResult DeleteProject([FromBody] DeleteProjectRequest deleteProjectRequest)
         {
             _projectService.DeleteProject(deleteProjectRequest.ProjectId);
             return Ok(new { message = "Project deleted." });
         }
-
-        public IActionResult GetAllCompanyProjects([FromBody] GetAllCompanyProjectsRequest getAllCompanyProjectsRequest)
+        [HttpGet("companyId")]
+        public IActionResult GetAllCompanyProjects(long companyId)
         {
-            var projects = _projectService.GetAllCompanyProjects(getAllCompanyProjectsRequest.CompanyId);
+            var projects = _projectService.GetAllCompanyProjects(companyId);
             return Ok(projects);
         }
 

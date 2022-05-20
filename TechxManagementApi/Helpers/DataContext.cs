@@ -21,7 +21,14 @@ public class DataContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
         // connect to postgresql database
-        options.UseNpgsql(Environment.GetEnvironmentVariable("TECHX_DB_CONNECTION_STRING"));
+        #if (DEBUG)
 
+            options.UseNpgsql(Configuration["AppSettings:TECHX_DB_CONNECTION_STRING"]);
+
+        #else
+
+            options.UseNpgsql(Environment.GetEnvironmentVariable("TECHX_DB_CONNECTION_STRING"));
+
+        #endif
     }
 }

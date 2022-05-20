@@ -20,7 +20,7 @@ namespace TechxManagementApi.Services
         private readonly IJwtUtils _jwtUtils;
         private readonly IMapper _mapper;
         private readonly AppSettings _appSettings;
-        private readonly IEmailService _emailService;
+        // private readonly IEmailService _emailService;
 
         public CompanyService(
             DataContext context,

@@ -1,9 +1,11 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32407.343
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechxManagementApi", "TechxManagementApi.csproj", "{63ED38C4-F7E4-4A4C-9DE2-14895F75AE72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechxManagementApi", "TechxManagementApi\TechxManagementApi.csproj", "{63ED38C4-F7E4-4A4C-9DE2-14895F75AE72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechxMangementApi.Tests", "TechxMangementApi.Tests\TechxMangementApi.Tests.csproj", "{D05FAA17-D83C-492E-A3BB-99CA646D294A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{63ED38C4-F7E4-4A4C-9DE2-14895F75AE72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63ED38C4-F7E4-4A4C-9DE2-14895F75AE72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63ED38C4-F7E4-4A4C-9DE2-14895F75AE72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D05FAA17-D83C-492E-A3BB-99CA646D294A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D05FAA17-D83C-492E-A3BB-99CA646D294A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D05FAA17-D83C-492E-A3BB-99CA646D294A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D05FAA17-D83C-492E-A3BB-99CA646D294A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
