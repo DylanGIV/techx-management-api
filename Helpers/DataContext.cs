@@ -6,6 +6,10 @@ using TechxManagementApi.Entities;
 public class DataContext : DbContext
 {
     public DbSet<Account> Accounts { get; set; }
+    public DbSet<Company> Companies { get; set; }
+    public DbSet<Project> Projects { get; set; }
+    public DbSet<Team> Teams { get; set; }
+    public DbSet<Task> Tasks { get; set; }
     
     private readonly IConfiguration Configuration;
 

@@ -44,6 +44,8 @@ var builder = WebApplication.CreateBuilder(args);
     services.AddScoped<IJwtUtils, JwtUtils>();
     services.AddScoped<IAccountService, AccountService>();
     services.AddScoped<IEmailService, EmailService>();
+    services.AddScoped<ICompanyService, CompanyService>();
+
 }
 
 var app = builder.Build();

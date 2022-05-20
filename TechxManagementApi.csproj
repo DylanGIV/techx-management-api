@@ -26,5 +26,9 @@
     </ItemGroup>
     <ItemGroup>
       <None Remove="Npgsql" />
+      <None Remove="Models\Companies\" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Models\Companies\" />
     </ItemGroup>
 </Project>
