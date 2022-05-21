@@ -45,6 +45,7 @@ namespace TechxManagementApi.Services
             }
 
             var company = new Company();
+            // needs to be updated, currently not working
             var accountId = _jwtUtils.ValidateJwtToken(token);
             var owner = _context.Accounts.Find(accountId);
 

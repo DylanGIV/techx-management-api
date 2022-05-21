@@ -4,7 +4,7 @@
 //using TechxManagementApi.Authorization;
 //using TechxManagementApi.Entities;
 //using TechxManagementApi.Helpers;
-//using TechxManagementApi.Models.Companies;
+//using TechxManagementApi.Models.Tasks;
 
 //namespace TechxManagementApi.Services
 //{

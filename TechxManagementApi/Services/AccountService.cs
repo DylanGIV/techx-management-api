@@ -142,9 +142,10 @@ public class AccountService : IAccountService
         // map model to new account object
         var account = _mapper.Map<Account>(model);
 
-        // first registered account is an admin
+        // CURRENTLY ALL ACCOUNTS ARE ADMIN
         var isFirstAccount = _context.Accounts.Count() == 0;
-        account.Role = isFirstAccount ? Role.Admin : Role.User;
+        // account.Role = isFirstAccount ? Role.Admin : Role.User;
+        account.Role = Role.Admin;
         account.Created = DateTime.UtcNow;
         account.VerificationToken = generateVerificationToken();
 

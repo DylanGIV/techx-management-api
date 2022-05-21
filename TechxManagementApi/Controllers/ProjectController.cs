@@ -31,8 +31,8 @@ namespace TechxManagementApi.Controllers
         }
 
         [Authorize(Role.Admin)]
-        [HttpPost]
-        [Route("update/team")]
+        [HttpPut]
+        [Route("team")]
         public IActionResult UpdateProjectTeam([FromBody] UpdateProjectTeamRequest updateProjectTeamRequest)
         {
             _projectService.UpdateProjectTeam(updateProjectTeamRequest);

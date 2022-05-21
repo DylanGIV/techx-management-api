@@ -81,6 +81,7 @@ var builder = WebApplication.CreateBuilder(args);
     services.AddScoped<IEmailService, EmailService>();
     services.AddScoped<ICompanyService, CompanyService>();
     services.AddScoped<IProjectService, ProjectService>();
+    services.AddScoped<ITeamService, TeamService>();
 
 }
 
@@ -97,7 +98,11 @@ using (var scope = app.Services.CreateScope())
 {
     // generated swagger json and swagger ui middleware
     app.UseSwagger();
-    app.UseSwaggerUI(x => x.SwaggerEndpoint("/swagger/v1/swagger.json", ".NET Sign-up and Verification API"));
+    app.UseSwaggerUI(x => 
+    {
+        x.SwaggerEndpoint("/swagger/v1/swagger.json", ".NET Sign-up and Verification API");
+        x.RoutePrefix = "";
+    });
     
     
     // global cors policy

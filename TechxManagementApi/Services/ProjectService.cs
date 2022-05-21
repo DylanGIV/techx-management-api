@@ -63,8 +63,8 @@ namespace TechxManagementApi.Services
         public void UpdateProjectTeam(UpdateProjectTeamRequest model)
         {
             //switch toi use find
-            var project = _context.Projects.First(p => p.Id == model.ProjectId);
-            var team = _context.Teams.First(t => t.Id == model.TeamId);
+            var project = _context.Projects.Find(model.ProjectId);
+            var team = _context.Teams.Find(model.TeamId);
             project.Team = team;
 
             _context.SaveChanges();

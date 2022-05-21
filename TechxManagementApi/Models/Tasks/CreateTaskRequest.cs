@@ -1,6 +1,6 @@
 using System;
 
-namespace TechxManagementApi.Models.Projects
+namespace TechxManagementApi.Models.Tasks
 {
 	public class CreateTaskRequest
 	{
