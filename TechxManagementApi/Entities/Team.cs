@@ -3,10 +3,12 @@ namespace TechxManagementApi.Entities
 {
 	public class Team
 	{
-		public long Id { get; set; }
+		public int Id { get; set; }
 		public string TeamName { get; set; }
-		public Company Company { get; set; }
-		public List<Account> Employees { get; set; }
+		public virtual List<Project> Projects { get; set; }
+		public int CompanyId { get; set; }
+		public virtual Company Company { get; set; }
+		public virtual ICollection<Account> Employees { get; set; }
 	}
 }
 

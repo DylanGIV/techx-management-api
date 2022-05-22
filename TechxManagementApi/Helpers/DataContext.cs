@@ -17,6 +17,19 @@ public class DataContext : DbContext
     {
         Configuration = configuration;
     }
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Account>()
+                .HasMany(a => a.Companies)
+                .WithMany(c => c.Employees);
+            modelBuilder.Entity<Company>()
+                .HasOne(o => o.Owner)
+                .WithMany(c => c.OwnsCompanies);
+            modelBuilder.Entity<Team>()
+                .HasMany(t => t.Projects)
+                .WithOne(p => p.Team);
+        }
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {

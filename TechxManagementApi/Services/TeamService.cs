@@ -12,7 +12,7 @@ namespace TechxManagementApi.Services
     {
         void CreateTeam(CreateTeamRequest model);
         void UpdateTeamName(UpdateTeamNameRequest model);
-        public List<Team> GetTeamsByCompany(long companyId);
+        public List<Team> GetTeamsByCompany(int companyId);
 
     }
 
@@ -72,7 +72,7 @@ namespace TechxManagementApi.Services
                 _context.SaveChanges();
             }
         }
-        public List<Team> GetTeamsByCompany(long companyId)
+        public List<Team> GetTeamsByCompany(int companyId)
         {
             var teams = _context.Teams.Where(t => t.Company.Id == companyId).ToList();
             return teams;

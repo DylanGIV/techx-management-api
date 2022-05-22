@@ -40,6 +40,20 @@ namespace TechxManagementApi.Controllers
             _companyService.InviteToCompany(inviteToCompanyRequest);
             return Ok(new { message = "Invites sent successfully to eligible users." });
         }
+        [HttpPost]
+        [Route("add")]
+        public IActionResult AddEmployeesToCompany([FromBody] AddEmployeesToCompanyRequest addEmployeesToCompanyRequest)
+        {
+            _companyService.AddEmployeesToCompany(addEmployeesToCompanyRequest);
+            return Ok(new { message = "Employees added to company." });
+        }
+        [HttpGet()]
+        [Route("all")]
+        public IActionResult GetAllCompanies()
+        {
+            var companies = _companyService.GetAllCompanies();
+            return Ok(companies);
+        }
 
     }
 }

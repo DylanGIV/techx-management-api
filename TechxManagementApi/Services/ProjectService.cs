@@ -12,8 +12,8 @@ namespace TechxManagementApi.Services
     {
         public void CreateProject(CreateProjectRequest model);
         public void UpdateProjectTeam(UpdateProjectTeamRequest model);
-        public void DeleteProject(long id);
-        public List<Project> GetAllCompanyProjects(long CompanyId);
+        public void DeleteProject(int id);
+        public List<Project> GetAllCompanyProjects(int CompanyId);
     }
 
 	public class ProjectService : IProjectService
@@ -69,12 +69,12 @@ namespace TechxManagementApi.Services
 
             _context.SaveChanges();
         }
-        public List<Project> GetAllCompanyProjects(long CompanyId)
+        public List<Project> GetAllCompanyProjects(int CompanyId)
         {
             var projects = _context.Projects.Where(p => p.Company.Id == CompanyId).ToList();
             return projects;
         }
-        public void DeleteProject(long id)
+        public void DeleteProject(int id)
         {
             var project = getProject(id);
             _context.Projects.Remove(project);
@@ -82,7 +82,7 @@ namespace TechxManagementApi.Services
         }
 
         // helper functions
-        private Project getProject(long id)
+        private Project getProject(int id)
         {
             var project = _context.Projects.Find(id);
             if (project == null) 

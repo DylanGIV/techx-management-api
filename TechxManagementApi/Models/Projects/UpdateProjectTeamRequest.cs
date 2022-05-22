@@ -5,8 +5,8 @@ namespace TechxManagementApi.Models.Projects
 {
 	public class UpdateProjectTeamRequest
 	{
-        public long ProjectId { get; set; }
-        public long TeamId { get; set; }
+        public int ProjectId { get; set; }
+        public int TeamId { get; set; }
 	}
 }
 

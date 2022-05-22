@@ -19,6 +19,10 @@ public class Account
     public DateTime Created { get; set; }
     public DateTime? Updated { get; set; }
     public List<RefreshToken> RefreshTokens { get; set; }
+    public virtual ICollection<Team> Teams { get; set; }
+    public virtual ICollection<Company> Companies { get; set; }
+    public virtual List<Task> Tasks { get; set; }
+    public virtual List<Company> OwnsCompanies { get; set; }
 
     public bool OwnsToken(string token) 
     {

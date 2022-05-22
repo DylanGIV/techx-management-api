@@ -40,7 +40,7 @@ namespace TechxManagementApi.Controllers
         }
         
         [HttpGet("companyId")]
-        public IActionResult GetTeamsByCompany(long companyId)
+        public IActionResult GetTeamsByCompany(int companyId)
         {
             var teams = _teamService.GetTeamsByCompany(companyId);
             return Ok(teams);

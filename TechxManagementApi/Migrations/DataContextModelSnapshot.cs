@@ -22,6 +22,36 @@ namespace TechxManagementApi.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("AccountCompany", b =>
+                {
+                    b.Property<int>("CompaniesId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("EmployeesId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("CompaniesId", "EmployeesId");
+
+                    b.HasIndex("EmployeesId");
+
+                    b.ToTable("AccountCompany");
+                });
+
+            modelBuilder.Entity("AccountTeam", b =>
+                {
+                    b.Property<int>("EmployeesId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("TeamsId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("EmployeesId", "TeamsId");
+
+                    b.HasIndex("TeamsId");
+
+                    b.ToTable("AccountTeam");
+                });
+
             modelBuilder.Entity("TechxManagementApi.Entities.Account", b =>
                 {
                     b.Property<int>("Id")
@@ -35,9 +65,6 @@ namespace TechxManagementApi.Migrations
 
                     b.Property<string>("Company")
                         .HasColumnType("text");
-
-                    b.Property<long?>("CompanyId")
-                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("timestamp with time zone");
@@ -66,9 +93,6 @@ namespace TechxManagementApi.Migrations
                     b.Property<int>("Role")
                         .HasColumnType("integer");
 
-                    b.Property<long?>("TeamId")
-                        .HasColumnType("bigint");
-
                     b.Property<DateTime?>("Updated")
                         .HasColumnType("timestamp with time zone");
 
@@ -80,20 +104,16 @@ namespace TechxManagementApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CompanyId");
-
-                    b.HasIndex("TeamId");
-
                     b.ToTable("Accounts");
                 });
 
             modelBuilder.Entity("TechxManagementApi.Entities.Company", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CompanyName")
                         .HasColumnType("text");
@@ -110,14 +130,14 @@ namespace TechxManagementApi.Migrations
 
             modelBuilder.Entity("TechxManagementApi.Entities.Project", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<long?>("CompanyId")
-                        .HasColumnType("bigint");
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("ProjectDescription")
                         .HasColumnType("text");
@@ -125,8 +145,8 @@ namespace TechxManagementApi.Migrations
                     b.Property<string>("ProjectName")
                         .HasColumnType("text");
 
-                    b.Property<long?>("TeamId")
-                        .HasColumnType("bigint");
+                    b.Property<int?>("TeamId")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -139,20 +159,17 @@ namespace TechxManagementApi.Migrations
 
             modelBuilder.Entity("TechxManagementApi.Entities.Task", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int?>("CreatedById")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("EmployeeId")
+                    b.Property<int>("ProjectId")
                         .HasColumnType("integer");
-
-                    b.Property<long?>("ProjectId")
-                        .HasColumnType("bigint");
 
                     b.Property<string>("TaskDescription")
                         .HasColumnType("text");
@@ -164,8 +181,6 @@ namespace TechxManagementApi.Migrations
 
                     b.HasIndex("CreatedById");
 
-                    b.HasIndex("EmployeeId");
-
                     b.HasIndex("ProjectId");
 
                     b.ToTable("Tasks");
@@ -173,14 +188,14 @@ namespace TechxManagementApi.Migrations
 
             modelBuilder.Entity("TechxManagementApi.Entities.Team", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<long?>("CompanyId")
-                        .HasColumnType("bigint");
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("TeamName")
                         .HasColumnType("text");
@@ -192,16 +207,38 @@ namespace TechxManagementApi.Migrations
                     b.ToTable("Teams");
                 });
 
-            modelBuilder.Entity("TechxManagementApi.Entities.Account", b =>
+            modelBuilder.Entity("AccountCompany", b =>
                 {
                     b.HasOne("TechxManagementApi.Entities.Company", null)
-                        .WithMany("Employees")
-                        .HasForeignKey("CompanyId");
+                        .WithMany()
+                        .HasForeignKey("CompaniesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TechxManagementApi.Entities.Account", null)
+                        .WithMany()
+                        .HasForeignKey("EmployeesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("AccountTeam", b =>
+                {
+                    b.HasOne("TechxManagementApi.Entities.Account", null)
+                        .WithMany()
+                        .HasForeignKey("EmployeesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("TechxManagementApi.Entities.Team", null)
-                        .WithMany("Employees")
-                        .HasForeignKey("TeamId");
+                        .WithMany()
+                        .HasForeignKey("TeamsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
 
+            modelBuilder.Entity("TechxManagementApi.Entities.Account", b =>
+                {
                     b.OwnsMany("TechxManagementApi.Entities.RefreshToken", "RefreshTokens", b1 =>
                         {
                             b1.Property<int>("Id")
@@ -255,7 +292,7 @@ namespace TechxManagementApi.Migrations
             modelBuilder.Entity("TechxManagementApi.Entities.Company", b =>
                 {
                     b.HasOne("TechxManagementApi.Entities.Account", "Owner")
-                        .WithMany()
+                        .WithMany("OwnsCompanies")
                         .HasForeignKey("OwnerId");
 
                     b.Navigation("Owner");
@@ -265,10 +302,12 @@ namespace TechxManagementApi.Migrations
                 {
                     b.HasOne("TechxManagementApi.Entities.Company", "Company")
                         .WithMany("Projects")
-                        .HasForeignKey("CompanyId");
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("TechxManagementApi.Entities.Team", "Team")
-                        .WithMany()
+                        .WithMany("Projects")
                         .HasForeignKey("TeamId");
 
                     b.Navigation("Company");
@@ -279,20 +318,16 @@ namespace TechxManagementApi.Migrations
             modelBuilder.Entity("TechxManagementApi.Entities.Task", b =>
                 {
                     b.HasOne("TechxManagementApi.Entities.Account", "CreatedBy")
-                        .WithMany()
+                        .WithMany("Tasks")
                         .HasForeignKey("CreatedById");
-
-                    b.HasOne("TechxManagementApi.Entities.Account", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeId");
 
                     b.HasOne("TechxManagementApi.Entities.Project", "Project")
                         .WithMany("Tasks")
-                        .HasForeignKey("ProjectId");
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("CreatedBy");
-
-                    b.Navigation("Employee");
 
                     b.Navigation("Project");
                 });
@@ -300,17 +335,26 @@ namespace TechxManagementApi.Migrations
             modelBuilder.Entity("TechxManagementApi.Entities.Team", b =>
                 {
                     b.HasOne("TechxManagementApi.Entities.Company", "Company")
-                        .WithMany()
-                        .HasForeignKey("CompanyId");
+                        .WithMany("Teams")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Company");
                 });
 
+            modelBuilder.Entity("TechxManagementApi.Entities.Account", b =>
+                {
+                    b.Navigation("OwnsCompanies");
+
+                    b.Navigation("Tasks");
+                });
+
             modelBuilder.Entity("TechxManagementApi.Entities.Company", b =>
                 {
-                    b.Navigation("Employees");
-
                     b.Navigation("Projects");
+
+                    b.Navigation("Teams");
                 });
 
             modelBuilder.Entity("TechxManagementApi.Entities.Project", b =>
@@ -320,7 +364,7 @@ namespace TechxManagementApi.Migrations
 
             modelBuilder.Entity("TechxManagementApi.Entities.Team", b =>
                 {
-                    b.Navigation("Employees");
+                    b.Navigation("Projects");
                 });
 #pragma warning restore 612, 618
         }
