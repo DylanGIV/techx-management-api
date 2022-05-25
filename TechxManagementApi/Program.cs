@@ -6,6 +6,7 @@ using TechxManagementApi.Helpers;
 using TechxManagementApi.Services;
 using System.Configuration;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +21,7 @@ var builder = WebApplication.CreateBuilder(args);
     {
         // serialize enums as strings in api responses (e.g. Role)
         x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-        x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+        x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
     });
     services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
     services.AddSwaggerGen(swagger =>
