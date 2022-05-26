@@ -47,11 +47,18 @@ namespace TechxManagementApi.Controllers
             _companyService.AddEmployeesToCompany(addEmployeesToCompanyRequest);
             return Ok(new { message = "Employees added to company." });
         }
-        [HttpGet()]
+        [HttpGet]
         [Route("all")]
         public IActionResult GetAllCompanies()
         {
             var companies = _companyService.GetAllCompanies();
+            return Ok(companies);
+        }
+        [HttpGet]
+        [Route("employee")]
+        public IActionResult GetCompaniesByAccount()
+        {
+            var companies = _companyService.GetCompaniesByAccount();
             return Ok(companies);
         }
 

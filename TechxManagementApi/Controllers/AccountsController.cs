@@ -58,7 +58,9 @@ public class AccountsController : BaseController
     [HttpPost("register")]
     public IActionResult Register(RegisterRequest model)
     {
+        // const string URL = "https://techx-management-api.herokuapp.com"; 
         _accountService.Register(model, Request.Headers["origin"]);
+        // _accountService.Register(model, URL);
         return Ok(new { message = "Registration successful, please check your email for verification instructions" });
     }
 

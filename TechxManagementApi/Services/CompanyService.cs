@@ -1,5 +1,6 @@
 ﻿using System;
 using AutoMapper;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Options;
 using TechxManagementApi.Authorization;
 using TechxManagementApi.Entities;
@@ -14,11 +15,14 @@ namespace TechxManagementApi.Services
         void InviteToCompany(InviteToCompanyRequest model);
         public void AddEmployeesToCompany(AddEmployeesToCompanyRequest addEmployeesToCompanyRequest);
         public List<Company> GetAllCompanies();
+        public List<Company> GetCompaniesByAccount();
+
     }
 
 	public class CompanyService : ICompanyService
 	{
         private readonly DataContext _context;
+        private readonly IHttpContextAccessor _accessor;
         private readonly IJwtUtils _jwtUtils;
         private readonly IMapper _mapper;
         private readonly AppSettings _appSettings;
@@ -28,8 +32,10 @@ namespace TechxManagementApi.Services
             DataContext context,
             IJwtUtils jwtUtils,
             IMapper mapper,
-            IOptions<AppSettings> appSettings)
+            IOptions<AppSettings> appSettings,
+            IHttpContextAccessor accessor)
         {
+            _accessor = accessor;
             _context = context;
             _jwtUtils = jwtUtils;
             _mapper = mapper;
@@ -45,11 +51,10 @@ namespace TechxManagementApi.Services
                 // if company already exists
                 throw new AppException("Company with this name already exists. Please contact support to resolve this issue.");
             }
+            var httpContext = _accessor.HttpContext;
 
             var company = new Company();
-            // needs to be updated, currently not working
-            var accountId = _jwtUtils.ValidateJwtToken(token);
-            var owner = _context.Accounts.Find(accountId);
+            var owner = (Account)httpContext.Items["Account"];
 
             company.CompanyName = model.CompanyName;
             company.Owner = owner;
@@ -104,6 +109,14 @@ namespace TechxManagementApi.Services
         public List<Company> GetAllCompanies()
         {
             var companies = _context.Companies.ToList();
+            return companies;
+        }
+        public List<Company> GetCompaniesByAccount()
+        {
+            var httpContext = _accessor.HttpContext;
+
+            var account = (Account)httpContext.Items["Account"];
+            var companies = _context.Companies.Where(c => c.Owner == account).ToList();
             return companies;
         }
     }
