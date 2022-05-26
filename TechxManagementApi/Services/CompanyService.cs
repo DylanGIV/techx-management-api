@@ -11,7 +11,7 @@ namespace TechxManagementApi.Services
 {
     public interface ICompanyService
     {
-        void CreateCompany(CreateCompanyRequest model, string token);
+        void CreateCompany(CreateCompanyRequest model);
         void InviteToCompany(InviteToCompanyRequest model);
         public void AddEmployeesToCompany(AddEmployeesToCompanyRequest addEmployeesToCompanyRequest);
         public List<Company> GetAllCompanies();
@@ -44,7 +44,7 @@ namespace TechxManagementApi.Services
            ;
         }
 
-        public void CreateCompany(CreateCompanyRequest model, string token)
+        public void CreateCompany(CreateCompanyRequest model)
         {
             // validate
             if (_context.Companies.Any(x => x.CompanyName == model.CompanyName))

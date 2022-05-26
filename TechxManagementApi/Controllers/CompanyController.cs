@@ -26,9 +26,9 @@ namespace TechxManagementApi.Controllers
         [Authorize(Role.Admin)]
         [HttpPost]
         [Route("create")]
-        public IActionResult CreateCompany([FromBody] CreateCompanyRequest createCompanyRequest, [FromHeader] string authorization)
+        public IActionResult CreateCompany([FromBody] CreateCompanyRequest createCompanyRequest)
         {
-            _companyService.CreateCompany(createCompanyRequest, authorization);
+            _companyService.CreateCompany(createCompanyRequest);
             return Ok(new { message = "Company created successfully." });
         }
 
