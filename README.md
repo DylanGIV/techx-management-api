@@ -7,7 +7,7 @@ Open the solution file
 
 Run the program using the green play button on "TechxManagementApi"
 
-Visit and test the api using swagger at https://techx-management-api.herokuapp.com/swagger/index.html
+Visit and test the api using swagger at https://techx-management-api.herokuapp.com/index.html
 
 Hosted on Heroku.
 
