@@ -46,5 +46,13 @@ namespace TechxManagementApi.Controllers
             return Ok(teams);
 
         }
+        [Authorize(Role.Admin)]
+        [HttpDelete]
+        [Route("delete")]
+        public IActionResult DeleteTeam([FromBody] DeleteTeamRequest deleteTeamRequest)
+        {
+            _teamService.DeleteTeam(deleteTeamRequest.TeamId);
+            return Ok(new { message = "Team deleted." });
+        }
     }
 }

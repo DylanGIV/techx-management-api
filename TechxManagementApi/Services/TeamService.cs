@@ -13,6 +13,7 @@ namespace TechxManagementApi.Services
         void CreateTeam(CreateTeamRequest model);
         void UpdateTeamName(UpdateTeamNameRequest model);
         public List<Team> GetTeamsByCompany(int companyId);
+        public void DeleteTeam(int id);
 
     }
 
@@ -77,6 +78,28 @@ namespace TechxManagementApi.Services
             var teams = _context.Teams.Where(t => t.Company.Id == companyId).ToList();
             return teams;
         }
+        public void DeleteTeam(int id)
+        {
+            var team = getTeam(id);
+            if (team == null) 
+            {
+                throw new KeyNotFoundException("Team not found.");
+            }
+            _context.Teams.Remove(team);
+            _context.SaveChanges();
+        }
+
+        // helper functions
+        private Team getTeam(int id)
+        {
+            var team = _context.Teams.Find(id);
+            if (team == null) 
+            {
+                throw new KeyNotFoundException("Team not found.");
+            }
+            return team;
+        }
+        
     }
 }
 

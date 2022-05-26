@@ -77,6 +77,10 @@ namespace TechxManagementApi.Services
         public void DeleteProject(int id)
         {
             var project = getProject(id);
+            if (project == null) 
+            {
+                throw new KeyNotFoundException("Project not found.");
+            }
             _context.Projects.Remove(project);
             _context.SaveChanges();
         }

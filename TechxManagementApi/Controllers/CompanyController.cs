@@ -61,6 +61,14 @@ namespace TechxManagementApi.Controllers
             var companies = _companyService.GetCompaniesByAccount();
             return Ok(companies);
         }
+        [Authorize(Role.Admin)]
+        [HttpDelete]
+        [Route("delete")]
+        public IActionResult DeleteCompany([FromBody] DeleteCompanyRequest deleteCompanyRequest)
+        {
+            _companyService.DeleteCompany(deleteCompanyRequest.CompanyId);
+            return Ok(new { message = "Company deleted." });
+        }
 
     }
 }

@@ -16,6 +16,7 @@ namespace TechxManagementApi.Services
         public void AddEmployeesToCompany(AddEmployeesToCompanyRequest addEmployeesToCompanyRequest);
         public List<Company> GetAllCompanies();
         public List<Company> GetCompaniesByAccount();
+        public void DeleteCompany(int id);
 
     }
 
@@ -116,8 +117,33 @@ namespace TechxManagementApi.Services
             var httpContext = _accessor.HttpContext;
 
             var account = (Account)httpContext.Items["Account"];
+            if (account == null) 
+            {
+                throw new NullReferenceException("Error retrieving account information.");
+            }
             var companies = _context.Companies.Where(c => c.Owner == account).ToList();
             return companies;
+        }
+        public void DeleteCompany(int id)
+        {
+            var company = getCompany(id);
+            if (company == null) 
+            {
+                throw new KeyNotFoundException("Company not found.");
+            }
+            _context.Companies.Remove(company);
+            _context.SaveChanges();
+        }
+
+        // helper functions
+        private Company getCompany(int id)
+        {
+            var company = _context.Companies.Find(id);
+            if (company == null) 
+            {
+                throw new KeyNotFoundException("Company not found.");
+            }
+            return company;
         }
     }
 }
