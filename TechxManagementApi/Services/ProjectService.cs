@@ -13,7 +13,7 @@ namespace TechxManagementApi.Services
         public void CreateProject(CreateProjectRequest model);
         public void UpdateProjectTeam(UpdateProjectTeamRequest model);
         public void DeleteProject(int id);
-        public List<Project> GetAllCompanyProjects(int CompanyId);
+        public List<Project> GetAllAccountProjects();
     }
 
 	public class ProjectService : IProjectService
@@ -21,6 +21,7 @@ namespace TechxManagementApi.Services
         private readonly DataContext _context;
         private readonly IJwtUtils _jwtUtils;
         private readonly IMapper _mapper;
+        private readonly IHttpContextAccessor _accessor;
         private readonly AppSettings _appSettings;
         // private readonly IEmailService _emailService;
 
@@ -28,8 +29,10 @@ namespace TechxManagementApi.Services
             DataContext context,
             IJwtUtils jwtUtils,
             IMapper mapper,
-            IOptions<AppSettings> appSettings)
+            IOptions<AppSettings> appSettings,
+            IHttpContextAccessor accessor)
         {
+            _accessor = accessor;
             _context = context;
             _jwtUtils = jwtUtils;
             _mapper = mapper;
@@ -69,9 +72,17 @@ namespace TechxManagementApi.Services
 
             _context.SaveChanges();
         }
-        public List<Project> GetAllCompanyProjects(int CompanyId)
+        public List<Project> GetAllAccountProjects()
         {
-            var projects = _context.Projects.Where(p => p.Company.Id == CompanyId).ToList();
+            var httpContext = _accessor.HttpContext;
+            var account = (Account)httpContext.Items["Account"];
+            
+            if (account == null) 
+            {
+                throw new KeyNotFoundException("Account not found.");
+            }
+
+            var projects = _context.Projects.Where(p => p.Company.Owner == account || p.Company.Employees.Any(e => e.Id == account.Id)).ToList();
             return projects;
         }
         public void DeleteProject(int id)

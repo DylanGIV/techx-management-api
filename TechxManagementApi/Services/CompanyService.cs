@@ -72,20 +72,21 @@ namespace TechxManagementApi.Services
         {
             bool add = true;
             var accounts = new List<Account>();
-            // addEmployeesToCompanyRequest.AccountIds.ForEach(a => accounts.Add(_context.Accounts.Find(a)));
 
             var company = _context.Companies.Find(addEmployeesToCompanyRequest.CompanyId);
             
-            if (company.Employees != null && addEmployeesToCompanyRequest.AccountIds.Count > 0)
+            if (addEmployeesToCompanyRequest.AccountIds.Count > 0)
             {
                 foreach (var a in addEmployeesToCompanyRequest.AccountIds)
                 {
                     add = true;
-                    foreach (var e in company.Employees)
-                    {
-                        if (e.Id == a)
+                    if (company.Employees != null) {
+                        foreach (var e in company.Employees)
                         {
-                            add = false;
+                            if (e.Id == a)
+                            {
+                                add = false;
+                            }
                         }
                     }
                     if (add)
@@ -93,13 +94,14 @@ namespace TechxManagementApi.Services
                         accounts.Add(_context.Accounts.Find(a));
                     }
                 }
-
-                // _context.Accounts.Where(a => )
-                // .Join(_context.Companies, a => a.Id, c => c.Id, (a, c) => new {a, c})
             }
 
             if (accounts.Count > 0)
             {
+                if (company.Employees is null)
+                {
+                    company.Employees = new List<Account>();
+                }
                 foreach (var a in accounts)
                 {
                     company.Employees.Add(a);

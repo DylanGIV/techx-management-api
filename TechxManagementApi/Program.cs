@@ -77,7 +77,6 @@ var builder = WebApplication.CreateBuilder(args);
     services.Configure<AppSettings>(config);
 
     services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-    // services.AddHttpClient<ICompanyService, CompanyService>();
 
     // configure DI for application services
     services.AddScoped<IJwtUtils, JwtUtils>();

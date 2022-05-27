@@ -47,9 +47,9 @@ namespace TechxManagementApi.Controllers
             return Ok(new { message = "Project deleted." });
         }
         [HttpGet("companyId")]
-        public IActionResult GetAllCompanyProjects(int companyId)
+        public IActionResult GetAllAccountProjects()
         {
-            var projects = _projectService.GetAllCompanyProjects(companyId);
+            var projects = _projectService.GetAllAccountProjects();
             return Ok(projects);
         }
 
