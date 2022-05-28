@@ -10,6 +10,7 @@ using TechxManagementApi.Services;
 
 namespace TechxManagementApi.Controllers
 {
+    [Authorize(Role.Admin)]
     [ApiController]
     [Route("[controller]")]
     public class ProjectController : Controller
@@ -21,16 +22,14 @@ namespace TechxManagementApi.Controllers
             _projectService = projectService;
         }
 
-        [Authorize(Role.Admin)]
         [HttpPost]
         [Route("create")]
-        public IActionResult CreateProject([FromBody] CreateProjectRequest createProjectRequest)
+        public async Task<IActionResult> CreateProject([FromBody] CreateProjectRequest createProjectRequest)
         {
-            _projectService.CreateProject(createProjectRequest);
+            await _projectService.CreateProject(createProjectRequest);
             return Ok(new { message = "Project created successfully." });
         }
 
-        [Authorize(Role.Admin)]
         [HttpPut]
         [Route("team")]
         public IActionResult UpdateProjectTeam([FromBody] UpdateProjectTeamRequest updateProjectTeamRequest)
@@ -38,7 +37,6 @@ namespace TechxManagementApi.Controllers
             _projectService.UpdateProjectTeam(updateProjectTeamRequest);
             return Ok(new { message = "Project Team updated." });
         }
-        [Authorize(Role.Admin)]
         [HttpDelete]
         [Route("delete")]
         public IActionResult DeleteProject([FromBody] DeleteProjectRequest deleteProjectRequest)

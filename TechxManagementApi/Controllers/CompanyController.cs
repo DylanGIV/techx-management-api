@@ -12,6 +12,7 @@ using TechxManagementApi.Services;
 
 namespace TechxManagementApi.Controllers
 {
+    [Authorize(Role.Admin)]
     [ApiController]
     [Route("[controller]")]
     public class CompanyController : BaseController
@@ -23,7 +24,6 @@ namespace TechxManagementApi.Controllers
             _companyService = companyService;
         }
 
-        [Authorize(Role.Admin)]
         [HttpPost]
         [Route("create")]
         public IActionResult CreateCompany([FromBody] CreateCompanyRequest createCompanyRequest)
@@ -32,7 +32,6 @@ namespace TechxManagementApi.Controllers
             return Ok(new { message = "Company created successfully." });
         }
 
-        [Authorize(Role.Admin)]
         [HttpPost]
         [Route("invite")]
         public IActionResult InviteToCompany([FromBody] InviteToCompanyRequest inviteToCompanyRequest)
@@ -61,7 +60,6 @@ namespace TechxManagementApi.Controllers
             var companies = _companyService.GetCompaniesByAccount();
             return Ok(companies);
         }
-        [Authorize(Role.Admin)]
         [HttpDelete]
         [Route("delete")]
         public IActionResult DeleteCompany([FromBody] DeleteCompanyRequest deleteCompanyRequest)

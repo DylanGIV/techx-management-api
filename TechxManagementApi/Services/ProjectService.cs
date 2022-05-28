@@ -10,7 +10,7 @@ namespace TechxManagementApi.Services
 {
     public interface IProjectService
     {
-        public void CreateProject(CreateProjectRequest model);
+        public System.Threading.Tasks.Task CreateProject(CreateProjectRequest model);
         public void UpdateProjectTeam(UpdateProjectTeamRequest model);
         public void DeleteProject(int id);
         public List<Project> GetAllAccountProjects();
@@ -39,11 +39,11 @@ namespace TechxManagementApi.Services
             _appSettings = appSettings.Value;
         }
 
-        public void CreateProject(CreateProjectRequest model)
+        public async System.Threading.Tasks.Task CreateProject(CreateProjectRequest model)
         {
             var project = new Project();
             // find company with matching id.
-            project.Company = _context.Companies.Find(model.CompanyId);
+            project.Company = await _context.Companies.FindAsync(model.CompanyId);
             project.ProjectName = model.ProjectName;
             project.ProjectDescription = model.ProjectDescription;
 
@@ -60,8 +60,8 @@ namespace TechxManagementApi.Services
             }
 
             // save project
-            _context.Projects.Add(project);
-            _context.SaveChanges();
+            await _context.Projects.AddAsync(project);
+            await _context.SaveChangesAsync();
         }
         public void UpdateProjectTeam(UpdateProjectTeamRequest model)
         {
