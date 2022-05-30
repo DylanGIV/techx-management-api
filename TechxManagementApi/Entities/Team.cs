@@ -9,6 +9,7 @@ namespace TechxManagementApi.Entities
 		public int CompanyId { get; set; }
 		public virtual Company Company { get; set; }
 		public virtual ICollection<Account> Employees { get; set; }
+		public virtual List<TeamTask> Tasks { get; set; }
 	}
 }
 

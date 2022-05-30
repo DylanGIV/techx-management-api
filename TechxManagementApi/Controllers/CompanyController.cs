@@ -12,7 +12,7 @@ using TechxManagementApi.Services;
 
 namespace TechxManagementApi.Controllers
 {
-    [Authorize(Role.Admin)]
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class CompanyController : BaseController

@@ -85,6 +85,7 @@ var builder = WebApplication.CreateBuilder(args);
     services.AddScoped<ICompanyService, CompanyService>();
     services.AddScoped<IProjectService, ProjectService>();
     services.AddScoped<ITeamService, TeamService>();
+    services.AddScoped<IAccountTaskService, AccountTaskService>();
 
 
 }

@@ -7,7 +7,8 @@ namespace TechxManagementApi.Entities
 		public int Id { get; set; }
 		public string ProjectName { get; set; }
 		public string ProjectDescription { get; set; }
-		public virtual List<Task> Tasks { get; set; }
+		public virtual List<AccountTask> AccountTasks { get; set; }
+		public virtual List<TeamTask> TeamTasks { get; set; }
 		public int? TeamId { get; set; }
 		public virtual Team Team { get; set; }
 		public int CompanyId { get; set; }

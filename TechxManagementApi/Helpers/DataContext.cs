@@ -9,7 +9,8 @@ public class DataContext : DbContext
     public DbSet<Company> Companies { get; set; }
     public DbSet<Project> Projects { get; set; }
     public DbSet<Team> Teams { get; set; }
-    public DbSet<Task> Tasks { get; set; }
+    public DbSet<AccountTask> AccountTasks { get; set; }
+    public DbSet<TeamTask> TeamTasks { get; set; }
     
     private readonly IConfiguration Configuration;
 
@@ -29,6 +30,18 @@ public class DataContext : DbContext
             modelBuilder.Entity<Team>()
                 .HasMany(t => t.Projects)
                 .WithOne(p => p.Team);
+            modelBuilder.Entity<Team>()
+                .HasMany(t => t.Tasks)
+                .WithOne(tt => tt.AssignedTo);
+            modelBuilder.Entity<Account>()
+                .HasMany(a => a.Tasks)
+                .WithOne(t => t.AssignedTo);
+            modelBuilder.Entity<Project>()
+                .HasMany(p => p.TeamTasks)
+                .WithOne(t => t.Project);
+            modelBuilder.Entity<Project>()
+                .HasMany(p => p.AccountTasks)
+                .WithOne(t => t.Project);
         }
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
