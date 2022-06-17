@@ -3,6 +3,8 @@ namespace TechxManagementApi.Helpers;
 using AutoMapper;
 using TechxManagementApi.Entities;
 using TechxManagementApi.Models.Accounts;
+using TechxManagementApi.Models.AccountTasks;
+using TechxManagementApi.Models.Projects;
 
 public class AutoMapperProfile : Profile
 {
@@ -31,5 +33,8 @@ public class AutoMapperProfile : Profile
                     return true;
                 }
             ));
+        CreateMap<AccountTask, AccountTaskResponse>();
+        CreateMap<Project, ProjectResponse>();
+
     }
 }

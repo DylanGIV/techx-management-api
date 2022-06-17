@@ -11,7 +11,7 @@ namespace TechxManagementApi.Services
     public interface IAccountTaskService
     {
         Task CreateAccountTaskAsync(CreateAccountTaskRequest model);
-        List<AccountTask> GetAllAccountTasks();
+        List<AccountTaskResponse> GetAllAccountTasks();
     }
 
         public class AccountTaskService : IAccountTaskService
@@ -45,11 +45,21 @@ namespace TechxManagementApi.Services
 
             var owner = (Account)httpContext.Items["Account"];
 
-
+            var currentTime = DateTime.UtcNow;
+            // var dueDate = DateTime.SpecifyKind(model.DueDate, DateTimeKind.Utc);
+            var dueDate = model.DueDate;
+            
+            if (dueDate.Kind != DateTimeKind.Utc)
+            {
+                dueDate = dueDate.ToUniversalTime();
+            }
+            
 
             accountTask.Title = model.TaskTitle;
             accountTask.Description = model.TaskDescription;
             accountTask.CreatedBy = owner;
+            accountTask.CreatedAt = currentTime;
+            accountTask.DueDate = dueDate;
             accountTask.AssignedTo = await _context.Accounts.FindAsync(model.AccountId);
             accountTask.Project = await _context.Projects.FindAsync(model.ProjectId);
 
@@ -58,9 +68,13 @@ namespace TechxManagementApi.Services
             await _context.SaveChangesAsync();
        }
        
-       public List<AccountTask> GetAllAccountTasks()
+       public List<AccountTaskResponse> GetAllAccountTasks()
        {
-            var accountTasks = _context.AccountTasks.ToList();
+            var accountTasksRaw = _context.AccountTasks.ToList();
+            var accountTasks = new List<AccountTaskResponse>();
+
+            accountTasks = _mapper.Map<List<AccountTask>, List<AccountTaskResponse>>(accountTasksRaw);
+            
             return accountTasks;
        }
 

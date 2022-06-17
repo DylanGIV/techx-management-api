@@ -8,6 +8,7 @@ namespace TechxManagementApi.Models.AccountTasks
         public string TaskDescription { get; set; }
 		public int AccountId { get; set; }
 		public int ProjectId { get; set; }
+		public DateTime DueDate { get; set; }
 	}
 }
 
