@@ -32,6 +32,14 @@ namespace TechxManagementApi.Controllers
             return Ok(new { message = "Task created successfully." });
         }
 
+        [HttpPut]
+        [Route("status")]
+        public async Task<IActionResult> UpdateAccountTaskStatus([FromBody] UpdateAccountTaskStatus updateAccountTaskStatus)
+        {
+            await _accountTaskService.UpdateAccountTaskStatusAsync(updateAccountTaskStatus);
+            return Ok(new { message = "Task status updated." });
+        }
+
         [HttpGet]
         [Route("all")]
         public IActionResult GetAllAccountTasks()
@@ -39,7 +47,20 @@ namespace TechxManagementApi.Controllers
             var accountTasks = _accountTaskService.GetAllAccountTasks();
             return Ok(accountTasks);
         }
-
+        [HttpDelete]
+        [Route("delete")]
+        public IActionResult DeleteAccountTask(int id)
+        {
+            _accountTaskService.DeleteAccountTaskAsync(id);
+            return Ok(new { message = "Task deleted." });
+        }
+        [HttpDelete]
+        [Route("all")]
+        public IActionResult DeleteAllAccountTasks()
+        {
+            _accountTaskService.DeleteAllAccountTasksAsync();
+            return Ok(new { message = "All tasks deleted." });
+        }
     }
 }
 

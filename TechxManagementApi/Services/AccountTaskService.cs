@@ -12,6 +12,9 @@ namespace TechxManagementApi.Services
     {
         Task CreateAccountTaskAsync(CreateAccountTaskRequest model);
         List<AccountTaskResponse> GetAllAccountTasks();
+        public Task DeleteAccountTaskAsync(int id);
+        public Task UpdateAccountTaskStatusAsync(UpdateAccountTaskStatus model);
+        public Task DeleteAllAccountTasksAsync();
     }
 
         public class AccountTaskService : IAccountTaskService
@@ -60,6 +63,7 @@ namespace TechxManagementApi.Services
             accountTask.CreatedBy = owner;
             accountTask.CreatedAt = currentTime;
             accountTask.DueDate = dueDate;
+            accountTask.Completed = false;
             accountTask.AssignedTo = await _context.Accounts.FindAsync(model.AccountId);
             accountTask.Project = await _context.Projects.FindAsync(model.ProjectId);
 
@@ -67,16 +71,52 @@ namespace TechxManagementApi.Services
             await _context.AccountTasks.AddAsync(accountTask);
             await _context.SaveChangesAsync();
        }
+       public async Task UpdateAccountTaskStatusAsync(UpdateAccountTaskStatus model)
+       {
+            var task = await _context.AccountTasks.FindAsync(model.Id);
+            task.Completed = model.Status;
+
+            await _context.SaveChangesAsync();
+       }
        
        public List<AccountTaskResponse> GetAllAccountTasks()
        {
-            var accountTasksRaw = _context.AccountTasks.ToList();
             var accountTasks = new List<AccountTaskResponse>();
 
-            accountTasks = _mapper.Map<List<AccountTask>, List<AccountTaskResponse>>(accountTasksRaw);
+            if (_context.AccountTasks.Any())
+            {
+                var accountTasksRaw = _context.AccountTasks.ToList();
+                accountTasks = _mapper.Map<List<AccountTask>, List<AccountTaskResponse>>(accountTasksRaw);
+            }
             
             return accountTasks;
        }
+        public async Task DeleteAccountTaskAsync(int id)
+        {
+            var task = getAccountTask(id);
+            if (task == null) 
+            {
+                throw new KeyNotFoundException("Task not found.");
+            }
+            _context.AccountTasks.Remove(task);
+            await _context.SaveChangesAsync();
+        }
+        public async Task DeleteAllAccountTasksAsync()
+        {
+            _context.AccountTasks.RemoveRange(_context.AccountTasks.ToList());
+            await _context.SaveChangesAsync();
+        }
+
+        // helper functions
+        private AccountTask getAccountTask(int id)
+        {
+            var task = _context.AccountTasks.Find(id);
+            if (task == null) 
+            {
+                throw new KeyNotFoundException("Task not found");
+            }
+            return task;
+        }
 
    }
 }

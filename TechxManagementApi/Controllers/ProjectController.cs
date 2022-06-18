@@ -44,7 +44,7 @@ namespace TechxManagementApi.Controllers
             _projectService.DeleteProject(deleteProjectRequest.ProjectId);
             return Ok(new { message = "Project deleted." });
         }
-        [HttpGet("companyId")]
+        [HttpGet]
         public IActionResult GetAllAccountProjects()
         {
             var projects = _projectService.GetAllAccountProjects();
