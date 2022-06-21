@@ -11,7 +11,7 @@ namespace TechxManagementApi.Services
     public interface IAccountTaskService
     {
         Task CreateAccountTaskAsync(CreateAccountTaskRequest model);
-        List<AccountTaskResponse> GetAllAccountTasks();
+        List<AccountTaskResponse> GetAllAssignedAccountTasks();
         public Task DeleteAccountTaskAsync(int id);
         public Task UpdateAccountTaskStatusAsync(UpdateAccountTaskStatus model);
         public Task DeleteAllAccountTasksAsync();
@@ -79,13 +79,16 @@ namespace TechxManagementApi.Services
             await _context.SaveChangesAsync();
        }
        
-       public List<AccountTaskResponse> GetAllAccountTasks()
+       public List<AccountTaskResponse> GetAllAssignedAccountTasks()
        {
             var accountTasks = new List<AccountTaskResponse>();
+            var httpContext = _accessor.HttpContext;
+
+            var account = (Account)httpContext.Items["Account"];
 
             if (_context.AccountTasks.Any())
             {
-                var accountTasksRaw = _context.AccountTasks.ToList();
+                var accountTasksRaw = _context.AccountTasks.Where(t => t.AssignedTo.Id == account.Id).ToList();
                 accountTasks = _mapper.Map<List<AccountTask>, List<AccountTaskResponse>>(accountTasksRaw);
             }
             

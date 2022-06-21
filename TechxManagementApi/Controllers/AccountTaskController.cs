@@ -44,7 +44,7 @@ namespace TechxManagementApi.Controllers
         [Route("all")]
         public IActionResult GetAllAccountTasks()
         {
-            var accountTasks = _accountTaskService.GetAllAccountTasks();
+            var accountTasks = _accountTaskService.GetAllAssignedAccountTasks();
             return Ok(accountTasks);
         }
         [HttpDelete]
