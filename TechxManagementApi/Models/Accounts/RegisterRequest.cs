@@ -5,9 +5,6 @@ using System.ComponentModel.DataAnnotations;
 public class RegisterRequest
 {
     [Required]
-    public string Company { get; set; }
-
-    [Required]
     public string FirstName { get; set; }
 
     [Required]
@@ -27,4 +24,6 @@ public class RegisterRequest
 
     [Range(typeof(bool), "true", "true")]
     public bool AcceptTerms { get; set; }
+    [Required]
+    public int Role { get; set; }
 }

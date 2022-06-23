@@ -145,7 +145,7 @@ public class AccountService : IAccountService
         // CURRENTLY ALL ACCOUNTS ARE ADMIN
         var isFirstAccount = _context.Accounts.Count() == 0;
         // account.Role = isFirstAccount ? Role.Admin : Role.User;
-        account.Role = Role.Admin;
+        account.Role = (Role)model.Role;
         account.Created = DateTime.UtcNow;
         account.VerificationToken = generateVerificationToken();
 
