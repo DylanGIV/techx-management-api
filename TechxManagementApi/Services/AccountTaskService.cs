@@ -15,6 +15,8 @@ namespace TechxManagementApi.Services
         public Task DeleteAccountTaskAsync(int id);
         public Task UpdateAccountTaskStatusAsync(UpdateAccountTaskStatus model);
         public Task DeleteAllAccountTasksAsync();
+       public List<AccountTaskResponse> GetAllProjectAccountTasks(int projectId);
+
     }
 
         public class AccountTaskService : IAccountTaskService
@@ -89,6 +91,18 @@ namespace TechxManagementApi.Services
             if (_context.AccountTasks.Any())
             {
                 var accountTasksRaw = _context.AccountTasks.Where(t => t.AssignedTo.Id == account.Id).ToList();
+                accountTasks = _mapper.Map<List<AccountTask>, List<AccountTaskResponse>>(accountTasksRaw);
+            }
+            
+            return accountTasks;
+       }
+       public List<AccountTaskResponse> GetAllProjectAccountTasks(int projectId)
+       {
+            var accountTasks = new List<AccountTaskResponse>();
+
+            if (_context.AccountTasks.Any())
+            {
+                var accountTasksRaw = _context.AccountTasks.Where(t => t.ProjectId == projectId).ToList();
                 accountTasks = _mapper.Map<List<AccountTask>, List<AccountTaskResponse>>(accountTasksRaw);
             }
             

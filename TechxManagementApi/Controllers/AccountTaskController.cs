@@ -47,6 +47,13 @@ namespace TechxManagementApi.Controllers
             var accountTasks = _accountTaskService.GetAllAssignedAccountTasks();
             return Ok(accountTasks);
         }
+        [HttpGet]
+        [Route("project")]
+        public IActionResult GetAllProjectAccountTasks(int projectId)
+        {
+            var projectTasks = _accountTaskService.GetAllProjectAccountTasks(projectId);
+            return Ok(projectTasks);
+        }
         [HttpDelete]
         [Route("delete")]
         public IActionResult DeleteAccountTask(int id)
