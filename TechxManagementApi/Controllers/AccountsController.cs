@@ -65,11 +65,11 @@ public class AccountsController : BaseController
     }
 
     [AllowAnonymous]
-    [HttpPost("verify-email")]
-    public IActionResult VerifyEmail(VerifyEmailRequest model)
+    [HttpGet("verify-email")]
+    public IActionResult VerifyEmail(string token)
     {
-        _accountService.VerifyEmail(model.Token);
-        return Ok(new { message = "Verification successful, you can now login" });
+        _accountService.VerifyEmail(token);
+        return Ok("Verification successful, you can now login.");
     }
 
     [AllowAnonymous]
