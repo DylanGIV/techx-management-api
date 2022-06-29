@@ -37,6 +37,13 @@ namespace TechxManagementApi.Controllers
             _projectService.UpdateProjectTeam(updateProjectTeamRequest);
             return Ok(new { message = "Project Team updated." });
         }
+        [HttpPut]
+        [Route("status")]
+        public IActionResult UpdateProjectStatus([FromBody] UpdateProjectStatusRequest updateProjectStatusRequest)
+        {
+            _projectService.UpdateProjectStatus(updateProjectStatusRequest);
+            return Ok(new { message = "Project Status updated." });
+        }
         [HttpDelete]
         [Route("delete")]
         public IActionResult DeleteProject([FromBody] DeleteProjectRequest deleteProjectRequest)

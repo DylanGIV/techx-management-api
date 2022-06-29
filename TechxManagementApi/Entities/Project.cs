@@ -13,6 +13,7 @@ namespace TechxManagementApi.Entities
 		public virtual Team Team { get; set; }
 		public int CompanyId { get; set; }
 		public virtual Company Company { get; set; }
+		public bool Completed { get; set; }
 	}
 }
 

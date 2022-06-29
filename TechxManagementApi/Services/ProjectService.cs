@@ -14,6 +14,8 @@ namespace TechxManagementApi.Services
         public void UpdateProjectTeam(UpdateProjectTeamRequest model);
         public void DeleteProject(int id);
         public List<Project> GetAllAccountProjects();
+        public void UpdateProjectStatus(UpdateProjectStatusRequest model);
+
     }
 
 	public class ProjectService : IProjectService
@@ -46,6 +48,7 @@ namespace TechxManagementApi.Services
             project.Company = await _context.Companies.FindAsync(model.CompanyId);
             project.ProjectName = model.ProjectName;
             project.ProjectDescription = model.ProjectDescription;
+            project.Completed = false;
 
             // in the case that no matching company could be found in the database
             if (project.Company == null)
@@ -69,6 +72,13 @@ namespace TechxManagementApi.Services
             var project = _context.Projects.Find(model.ProjectId);
             var team = _context.Teams.Find(model.TeamId);
             project.Team = team;
+
+            _context.SaveChanges();
+        }
+        public void UpdateProjectStatus(UpdateProjectStatusRequest model)
+        {
+            var project = _context.Projects.Find(model.ProjectId);
+            project.Completed = model.Status;
 
             _context.SaveChanges();
         }
